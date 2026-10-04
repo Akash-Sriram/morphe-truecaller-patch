@@ -3,6 +3,47 @@
   "version": "1.13.1",
   "patches": [
     {
+      "name": "Truecaller — Air-Gapped Smart Insights",
+      "description": "Preserves local on-device Smart SMS and Copy-OTP convenience while permanently cutting off background nudges, cloud backup, and financial hoarding.",
+      "default": true,
+      "category": null,
+      "dependencies": [],
+      "compatiblePackages": [
+        {
+          "packageName": "com.truecaller",
+          "name": "Truecaller",
+          "description": null,
+          "apkFileType": "APKM",
+          "appIconColor": "#005AF0",
+          "signatures": null,
+          "targets": [
+            {
+              "version": "26.10.6",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": 24,
+              "description": null
+            },
+            {
+              "version": "26.12.5",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": 24,
+              "description": null
+            },
+            {
+              "version": "26.39.6",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": 24,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
       "name": "Truecaller — Bypass Permission Gate",
       "description": "Bypasses the mandatory permission nag screen, allowing the app to run without contacts, call logs, or SMS permissions.",
       "default": true,
@@ -45,7 +86,7 @@
     },
     {
       "name": "Truecaller — Core Privacy & Minimalist Bundle",
-      "description": "Enables complete telemetry suppression, background worker neutralization, ad removal, 15 SDK killers, bloat tab removal, permission nag gate bypass, and SMS OTP login.",
+      "description": "Enables complete telemetry suppression, background worker neutralization, ad removal, 15 SDK killers, bloat tab removal, permission nag gate bypass, silent SMS suppression, air-gapped insights, and SMS OTP login.",
       "default": true,
       "category": null,
       "dependencies": [
@@ -61,8 +102,51 @@
         "BytecodePatch",
         "BytecodePatch",
         "BytecodePatch",
+        "BytecodePatch",
+        "BytecodePatch",
         "BytecodePatch"
       ],
+      "compatiblePackages": [
+        {
+          "packageName": "com.truecaller",
+          "name": "Truecaller",
+          "description": null,
+          "apkFileType": "APKM",
+          "appIconColor": "#005AF0",
+          "signatures": null,
+          "targets": [
+            {
+              "version": "26.10.6",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": 24,
+              "description": null
+            },
+            {
+              "version": "26.12.5",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": 24,
+              "description": null
+            },
+            {
+              "version": "26.39.6",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": 24,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
+      "name": "Truecaller — Disable Silent SMS Verification",
+      "description": "Neutralizes covert Mobile-Originated (MO) verification SMS messages by intercepting Truecaller verification nonces before reaching SmsManager.",
+      "default": true,
+      "category": null,
+      "dependencies": [],
       "compatiblePackages": [
         {
           "packageName": "com.truecaller",
