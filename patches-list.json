@@ -1,0 +1,594 @@
+{
+  "NOTE": "Do NOT manually edit this file. This file is automatically updated when semantic release (release.yml) runs. Manually editing this file can break your releases and break third party tools that use this file.",
+  "version": "1.13.1",
+  "patches": [
+    {
+      "name": "Truecaller — Bypass Permission Gate",
+      "description": "Bypasses the mandatory permission nag screen, allowing the app to run without contacts, call logs, or SMS permissions.",
+      "default": true,
+      "category": null,
+      "dependencies": [],
+      "compatiblePackages": [
+        {
+          "packageName": "com.truecaller",
+          "name": "Truecaller",
+          "description": null,
+          "apkFileType": "APKM",
+          "appIconColor": "#005AF0",
+          "signatures": null,
+          "targets": [
+            {
+              "version": "26.10.6",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": 24,
+              "description": null
+            },
+            {
+              "version": "26.12.5",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": 24,
+              "description": null
+            },
+            {
+              "version": "26.39.6",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": 24,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
+      "name": "Truecaller — Core Privacy & Minimalist Bundle",
+      "description": "Enables complete telemetry suppression, background worker neutralization, ad removal, 15 SDK killers, bloat tab removal, permission nag gate bypass, and SMS OTP login.",
+      "default": true,
+      "category": null,
+      "dependencies": [
+        "BytecodePatch",
+        "BytecodePatch",
+        "BytecodePatch",
+        "BytecodePatch",
+        "BytecodePatch",
+        "BytecodePatch",
+        "BytecodePatch",
+        "BytecodePatch",
+        "BytecodePatch",
+        "BytecodePatch",
+        "BytecodePatch",
+        "BytecodePatch",
+        "BytecodePatch"
+      ],
+      "compatiblePackages": [
+        {
+          "packageName": "com.truecaller",
+          "name": "Truecaller",
+          "description": null,
+          "apkFileType": "APKM",
+          "appIconColor": "#005AF0",
+          "signatures": null,
+          "targets": [
+            {
+              "version": "26.10.6",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": 24,
+              "description": null
+            },
+            {
+              "version": "26.12.5",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": 24,
+              "description": null
+            },
+            {
+              "version": "26.39.6",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": 24,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
+      "name": "Truecaller — Disable Telemetry",
+      "description": "Disables AppStartTracker, BatchLogClient (ljq), and technical telemetry checkpoints.",
+      "default": true,
+      "category": null,
+      "dependencies": [],
+      "compatiblePackages": [
+        {
+          "packageName": "com.truecaller",
+          "name": "Truecaller",
+          "description": null,
+          "apkFileType": "APKM",
+          "appIconColor": "#005AF0",
+          "signatures": null,
+          "targets": [
+            {
+              "version": "26.10.6",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": 24,
+              "description": null
+            },
+            {
+              "version": "26.12.5",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": 24,
+              "description": null
+            },
+            {
+              "version": "26.39.6",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": 24,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
+      "name": "Truecaller — Disable Update Check",
+      "description": "Disables in-app update checks and update nag prompts.",
+      "default": true,
+      "category": null,
+      "dependencies": [],
+      "compatiblePackages": [
+        {
+          "packageName": "com.truecaller",
+          "name": "Truecaller",
+          "description": null,
+          "apkFileType": "APKM",
+          "appIconColor": "#005AF0",
+          "signatures": null,
+          "targets": [
+            {
+              "version": "26.10.6",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": 24,
+              "description": null
+            },
+            {
+              "version": "26.12.5",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": 24,
+              "description": null
+            },
+            {
+              "version": "26.39.6",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": 24,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
+      "name": "Truecaller — GMS Sign-In Bypass",
+      "description": "Forces standard SMS-based OTP verification instead of GMS SmsRetriever, fixing login on re-signed APKs.",
+      "default": true,
+      "category": null,
+      "dependencies": [],
+      "compatiblePackages": [
+        {
+          "packageName": "com.truecaller",
+          "name": "Truecaller",
+          "description": null,
+          "apkFileType": "APKM",
+          "appIconColor": "#005AF0",
+          "signatures": null,
+          "targets": [
+            {
+              "version": "26.10.6",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": 24,
+              "description": null
+            },
+            {
+              "version": "26.12.5",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": 24,
+              "description": null
+            },
+            {
+              "version": "26.39.6",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": 24,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
+      "name": "Truecaller — Hide Assistant Tab",
+      "description": "Hides the AI Assistant tab from the bottom navigation bar.",
+      "default": true,
+      "category": null,
+      "dependencies": [],
+      "compatiblePackages": [
+        {
+          "packageName": "com.truecaller",
+          "name": "Truecaller",
+          "description": null,
+          "apkFileType": "APKM",
+          "appIconColor": "#005AF0",
+          "signatures": null,
+          "targets": [
+            {
+              "version": "26.10.6",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": 24,
+              "description": null
+            },
+            {
+              "version": "26.12.5",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": 24,
+              "description": null
+            },
+            {
+              "version": "26.39.6",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": 24,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
+      "name": "Truecaller — Hide Family Protection Button",
+      "description": "Hides the Family Protection button from the bottom navigation bar.",
+      "default": true,
+      "category": null,
+      "dependencies": [],
+      "compatiblePackages": [
+        {
+          "packageName": "com.truecaller",
+          "name": "Truecaller",
+          "description": null,
+          "apkFileType": "APKM",
+          "appIconColor": "#005AF0",
+          "signatures": null,
+          "targets": [
+            {
+              "version": "26.10.6",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": 24,
+              "description": null
+            },
+            {
+              "version": "26.12.5",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": 24,
+              "description": null
+            },
+            {
+              "version": "26.39.6",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": 24,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
+      "name": "Truecaller — Hide Scams Tab",
+      "description": "Hides the Scams tab from the bottom navigation bar.",
+      "default": true,
+      "category": null,
+      "dependencies": [],
+      "compatiblePackages": [
+        {
+          "packageName": "com.truecaller",
+          "name": "Truecaller",
+          "description": null,
+          "apkFileType": "APKM",
+          "appIconColor": "#005AF0",
+          "signatures": null,
+          "targets": [
+            {
+              "version": "26.10.6",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": 24,
+              "description": null
+            },
+            {
+              "version": "26.12.5",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": 24,
+              "description": null
+            },
+            {
+              "version": "26.39.6",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": 24,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
+      "name": "Truecaller — Network Blackhole & GDPR Enforcement",
+      "description": "Blackholes telemetry, logging, and profile exfiltration endpoints to 127.0.0.1 while forcing European GDPR privacy domain.",
+      "default": true,
+      "category": null,
+      "dependencies": [],
+      "compatiblePackages": [
+        {
+          "packageName": "com.truecaller",
+          "name": "Truecaller",
+          "description": null,
+          "apkFileType": "APKM",
+          "appIconColor": "#005AF0",
+          "signatures": null,
+          "targets": [
+            {
+              "version": "26.10.6",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": 24,
+              "description": null
+            },
+            {
+              "version": "26.12.5",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": 24,
+              "description": null
+            },
+            {
+              "version": "26.39.6",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": 24,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
+      "name": "Truecaller — Neutralize Surveillance Workers",
+      "description": "Neutralizes background contact harvesting, call history sync, sensor logging, and presence workers by forcing immediate success results.",
+      "default": true,
+      "category": null,
+      "dependencies": [],
+      "compatiblePackages": [
+        {
+          "packageName": "com.truecaller",
+          "name": "Truecaller",
+          "description": null,
+          "apkFileType": "APKM",
+          "appIconColor": "#005AF0",
+          "signatures": null,
+          "targets": [
+            {
+              "version": "26.10.6",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": 24,
+              "description": null
+            },
+            {
+              "version": "26.12.5",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": 24,
+              "description": null
+            },
+            {
+              "version": "26.39.6",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": 24,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
+      "name": "Truecaller — Neutralize Third-Party SDKs",
+      "description": "No-ops all embedded third-party ad networks, telemetry, and tracking SDK initializers (AdMob, Meta, Unity, Amazon, Criteo, AdRouter, Clarity, CleverTap, AppsFlyer, Moloco, HMS, Freshchat, InMobi, Appnext, Vungle, Fyber, Mintegral, IronSource, HyBid, Presence stream, MLKit).",
+      "default": true,
+      "category": null,
+      "dependencies": [],
+      "compatiblePackages": [
+        {
+          "packageName": "com.truecaller",
+          "name": "Truecaller",
+          "description": null,
+          "apkFileType": "APKM",
+          "appIconColor": "#005AF0",
+          "signatures": null,
+          "targets": [
+            {
+              "version": "26.10.6",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": 24,
+              "description": null
+            },
+            {
+              "version": "26.12.5",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": 24,
+              "description": null
+            },
+            {
+              "version": "26.39.6",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": 24,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
+      "name": "Truecaller — Remove Ads",
+      "description": "Removes ads from the after-call screen, caller-ID overlay, and suppresses ad feature toggles.",
+      "default": true,
+      "category": null,
+      "dependencies": [],
+      "compatiblePackages": [
+        {
+          "packageName": "com.truecaller",
+          "name": "Truecaller",
+          "description": null,
+          "apkFileType": "APKM",
+          "appIconColor": "#005AF0",
+          "signatures": null,
+          "targets": [
+            {
+              "version": "26.10.6",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": 24,
+              "description": null
+            },
+            {
+              "version": "26.12.5",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": 24,
+              "description": null
+            },
+            {
+              "version": "26.39.6",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": 24,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
+      "name": "Truecaller — Storage & Local Telemetry Minimization",
+      "description": "Neutralizes local SQLite telemetry logging (persisted_event in analytics.db), outgoing contact view logging (profile_view_events in tc.db), and Google Crashlytics/DataTransport registrars.",
+      "default": true,
+      "category": null,
+      "dependencies": [],
+      "compatiblePackages": [
+        {
+          "packageName": "com.truecaller",
+          "name": "Truecaller",
+          "description": null,
+          "apkFileType": "APKM",
+          "appIconColor": "#005AF0",
+          "signatures": null,
+          "targets": [
+            {
+              "version": "26.10.6",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": 24,
+              "description": null
+            },
+            {
+              "version": "26.12.5",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": 24,
+              "description": null
+            },
+            {
+              "version": "26.39.6",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": 24,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
+      "name": "Truecaller — Suppress Promotional Upsells & Paywalls",
+      "description": "Neutralizes promotional banners, incognito mode upsells, and paywall prompts across the dialer and contact views.",
+      "default": true,
+      "category": null,
+      "dependencies": [],
+      "compatiblePackages": [
+        {
+          "packageName": "com.truecaller",
+          "name": "Truecaller",
+          "description": null,
+          "apkFileType": "APKM",
+          "appIconColor": "#005AF0",
+          "signatures": null,
+          "targets": [
+            {
+              "version": "26.10.6",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": 24,
+              "description": null
+            },
+            {
+              "version": "26.12.5",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": 24,
+              "description": null
+            },
+            {
+              "version": "26.39.6",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": 24,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
+    }
+  ]
+}

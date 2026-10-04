@@ -1,0 +1,24 @@
+# Gradle & Build caches
+.gradle/
+.kotlin/
+build/
+**/build/
+
+# IDE files
+.idea/
+*.iml
+.vscode/
+
+# Build artifacts & binary packages
+*.apk
+*.apkm
+*.mpp
+*.idsig
+
+# Heavy decompilation binary caches (scripts in decompile/scripts remain tracked)
+decompile/dex/
+decompile/smali/
+
+# OS & Log files
+*.log
+.DS_Store
