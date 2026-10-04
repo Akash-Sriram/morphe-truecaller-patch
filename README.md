@@ -109,3 +109,14 @@ zip -d truecaller_patched.apk "assets/audience_network/*" || true
 zipalign -f -p 4 truecaller_patched.apk truecaller_aligned.apk
 apksigner sign --ks debug.keystore --ks-pass pass:android --out truecaller_patched.apk truecaller_aligned.apk
 ```
+
+---
+
+## Forensic Audit & Verification
+
+To verify that all telemetry, surveillance databases, background workers, and network sockets remain clean even when Truecaller is set as the default dialer with full permissions:
+
+```bash
+python3 decompile/scripts/dialer_audit.py
+python3 decompile/scripts/comprehensive_audit.py
+```
