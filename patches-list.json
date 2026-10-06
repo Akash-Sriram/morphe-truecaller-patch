@@ -108,6 +108,7 @@
         "BytecodePatch",
         "BytecodePatch",
         "BytecodePatch",
+        "BytecodePatch",
         "BytecodePatch"
       ],
       "compatiblePackages": [
@@ -763,6 +764,47 @@
     {
       "name": "Truecaller — Storage & Local Telemetry Minimization",
       "description": "Neutralizes local SQLite telemetry logging (persisted_event in analytics.db), outgoing contact view logging (profile_view_events in tc.db), and Google Crashlytics/DataTransport registrars.",
+      "default": true,
+      "category": null,
+      "dependencies": [],
+      "compatiblePackages": [
+        {
+          "packageName": "com.truecaller",
+          "name": "Truecaller",
+          "description": null,
+          "apkFileType": "APKM",
+          "appIconColor": "#005AF0",
+          "signatures": null,
+          "targets": [
+            {
+              "version": "26.10.6",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": 24,
+              "description": null
+            },
+            {
+              "version": "26.12.5",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": 24,
+              "description": null
+            },
+            {
+              "version": "26.39.6",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": 24,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
+      "name": "Truecaller — Suppress Default App Nags",
+      "description": "Suppresses default phone app and SMS app nag cards and banners in Messages feed, Settings main screen, and Calls troubleshooting.",
       "default": true,
       "category": null,
       "dependencies": [],
