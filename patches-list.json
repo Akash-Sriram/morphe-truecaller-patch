@@ -147,7 +147,7 @@
     },
     {
       "name": "Truecaller — Debloat Profile & Drawer Services",
-      "description": "Removes Fraud Insurance, Government Services, Invite Friends, and Android Watch from profile menu.",
+      "description": "No-op: prior implementation caused VerifyError due to register allocation mismatch in access$getOtherItems$cp.",
       "default": true,
       "category": null,
       "dependencies": [],
@@ -393,7 +393,7 @@
     },
     {
       "name": "Truecaller — Hide Assistant Tab",
-      "description": "Hides the AI Assistant tab from the bottom navigation bar.",
+      "description": "Hides the AI Assistant and Premium tabs from the bottom navigation bar.",
       "default": true,
       "category": null,
       "dependencies": [],
