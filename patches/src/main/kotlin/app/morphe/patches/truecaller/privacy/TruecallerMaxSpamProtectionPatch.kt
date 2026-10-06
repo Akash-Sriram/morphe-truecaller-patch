@@ -131,11 +131,11 @@ val truecallerMaxSpamProtectionPatch = bytecodePatch(
             }
         } catch (_: Exception) { /* fail-soft */ }
 
-        // 3. Hook Block Settings Presenter Lfe6;->l()Z and Lfe6;->m()Z
+        // 3. Hook Block Settings Presenter Lfe6;->l()Z (Extended Max Protection)
         try {
             val fe6Class = mutableClassDefBy("Lfe6;")
             for (method in fe6Class.methods) {
-                if ((method.name == "l" || method.name == "m") && method.parameterTypes.isEmpty() && method.returnType == "Z") {
+                if (method.name == "l" && method.parameterTypes.isEmpty() && method.returnType == "Z") {
                     if (method.implementation != null) {
                         method.addInstructions(
                             0,
