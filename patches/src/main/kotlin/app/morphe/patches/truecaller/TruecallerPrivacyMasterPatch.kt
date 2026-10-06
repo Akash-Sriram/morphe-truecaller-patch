@@ -4,6 +4,8 @@ import app.morphe.patcher.patch.bytecodePatch
 import app.morphe.patches.truecaller.ads.truecallerAdRemovalPatch
 import app.morphe.patches.truecaller.ads.truecallerPromotionalNeutralizePatch
 import app.morphe.patches.truecaller.ads.truecallerSdkNeutralizePatch
+import app.morphe.patches.truecaller.layout.truecallerDebloatProfileAndDrawerPatch
+import app.morphe.patches.truecaller.layout.truecallerDebloatSettingsCategoriesPatch
 import app.morphe.patches.truecaller.layout.truecallerHideAssistantTabPatch
 import app.morphe.patches.truecaller.layout.truecallerHideFamilyProtectionPatch
 import app.morphe.patches.truecaller.layout.truecallerHideScamsTabPatch
@@ -43,6 +45,8 @@ val truecallerPrivacyMasterPatch = bytecodePatch(
         truecallerHideAssistantTabPatch,
         truecallerHideFamilyProtectionPatch,
         truecallerHideScamsTabPatch,
+        truecallerDebloatSettingsCategoriesPatch,
+        truecallerDebloatProfileAndDrawerPatch,
         truecallerBypassPermissionGatePatch,
         truecallerNetworkBlackholePatch,
         truecallerPromotionalNeutralizePatch,

@@ -106,8 +106,92 @@
         "BytecodePatch",
         "BytecodePatch",
         "BytecodePatch",
+        "BytecodePatch",
+        "BytecodePatch",
         "BytecodePatch"
       ],
+      "compatiblePackages": [
+        {
+          "packageName": "com.truecaller",
+          "name": "Truecaller",
+          "description": null,
+          "apkFileType": "APKM",
+          "appIconColor": "#005AF0",
+          "signatures": null,
+          "targets": [
+            {
+              "version": "26.10.6",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": 24,
+              "description": null
+            },
+            {
+              "version": "26.12.5",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": 24,
+              "description": null
+            },
+            {
+              "version": "26.39.6",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": 24,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
+      "name": "Truecaller — Debloat Profile & Drawer Services",
+      "description": "Removes Fraud Insurance, Government Services, Invite Friends, and Android Watch from profile menu.",
+      "default": true,
+      "category": null,
+      "dependencies": [],
+      "compatiblePackages": [
+        {
+          "packageName": "com.truecaller",
+          "name": "Truecaller",
+          "description": null,
+          "apkFileType": "APKM",
+          "appIconColor": "#005AF0",
+          "signatures": null,
+          "targets": [
+            {
+              "version": "26.10.6",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": 24,
+              "description": null
+            },
+            {
+              "version": "26.12.5",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": 24,
+              "description": null
+            },
+            {
+              "version": "26.39.6",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": 24,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
+      "name": "Truecaller — Debloat Settings Categories",
+      "description": "Removes AI Call Assistant, Premium Store, Wear OS Watch, and Voicemail categories from Settings.",
+      "default": true,
+      "category": null,
+      "dependencies": [],
       "compatiblePackages": [
         {
           "packageName": "com.truecaller",
