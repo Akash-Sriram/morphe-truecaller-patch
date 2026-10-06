@@ -102,6 +102,8 @@ val truecallerDisableTelemetryPatch = bytecodePatch(
         // 5. Neutralize Sensor, Activity, Presence, and Unlock Surveillance Receivers
         val surveillanceReceivers = listOf(
             "Lcom/truecaller/familyprotect/domain/status/activity/receiver/UserActivityTransitionBroadcastReceiver;",
+            "Lcom/truecaller/familyprotect/domain/remotereject/notification/RemoteRejectNotificationButtonReceiver;",
+            "Lcom/truecaller/familyprotect/domain/notification/FamilyGroupNotificationActionReceiver;",
             "Lcom/truecaller/presence/domain/worker/PresenceSchedulerReceiver;",
             "Lcom/truecaller/util/ScreenUnlockedBroadcastReceiver;",
             "Lcom/truecaller/util/RingerModeChangedReceiver;",

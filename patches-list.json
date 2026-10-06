@@ -433,8 +433,8 @@
       "options": []
     },
     {
-      "name": "Truecaller — Hide Family Protection Button",
-      "description": "Hides the Family Protection button from the bottom navigation bar.",
+      "name": "Truecaller — Hide Family Protection Button & Neutralize Backend",
+      "description": "Hides the Family Protection button next to the search bar and neutralizes backend services and status APIs.",
       "default": true,
       "category": null,
       "dependencies": [],
