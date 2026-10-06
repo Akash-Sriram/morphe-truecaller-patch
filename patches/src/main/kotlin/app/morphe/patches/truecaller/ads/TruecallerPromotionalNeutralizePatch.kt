@@ -6,20 +6,18 @@ import app.morphe.patches.truecaller.shared.Constants.COMPATIBILITY_TRUECALLER
 
 /**
  * Suppresses promotional upsell banners, "upgrade to be invisible" incognito bottom sheets,
- * social proof upgrade cards, and full-screen paywalls.
+ * social proof upgrade cards, full-screen paywalls, and all full-screen ad/offerwall activities.
  */
 @Suppress("unused")
 val truecallerPromotionalNeutralizePatch = bytecodePatch(
     name = "Truecaller — Suppress Promotional Upsells & Paywalls",
-    description = "Neutralizes promotional banners, incognito mode upsells, and paywall prompts across the dialer and contact views.",
+    description = "Neutralizes promotional banners, incognito mode upsells, and paywall/ad activities across the app.",
     default = true,
 ) {
     compatibleWith(COMPATIBILITY_TRUECALLER)
 
     execute {
         // 1. Incognito / Ghost Mode Promotional Bottom Sheet (cdn.a)
-        // Suppress the promotional upsell bottom sheet (Ladn;) while executing
-        // the navigation lambda callback (p5) so search results expand to full profile
         try {
             val cdnClass = mutableClassDefBy("Lcdn;")
             for (method in cdnClass.methods) {
@@ -77,12 +75,21 @@ val truecallerPromotionalNeutralizePatch = bytecodePatch(
             }
         } catch (_: Exception) { /* fail-soft */ }
 
-        // 4. Paywall Screen Immediate Finish (FullScreenPaywallActivity, UpgradePathPaywallActivity, NavDrawerPaywallActivity)
-        for (paywallClassDef in listOf(
+        // 4. Paywall & Full-Screen Ad Activities Immediate Finish
+        val fullScreenActivitiesToFinish = listOf(
             "Lcom/truecaller/premium/FullScreenPaywallActivity;",
             "Lcom/truecaller/premium/UpgradePathPaywallActivity;",
             "Lcom/truecaller/premium/NavDrawerPaywallActivity;",
-        )) {
+            "Lcom/truecaller/ads/adsrouter/ui/interstitial/AdRouterInterstitialActivity;",
+            "Lcom/truecaller/ads/adsrouter/ui/offers/AdOffersActivity;",
+            "Lcom/truecaller/ads/rewarded/WhoViewedMeAdActivity;",
+            "Lcom/truecaller/ads/ui/CustomNativeVideoAdActivity;",
+            "Lcom/truecaller/ads/postclickexperience/common/ui/PostClickExperienceActivity;",
+            "Lcom/truecaller/ads/postclickexperience/type/htmlpage/HtmlPageActivity;",
+            "Lcom/truecaller/ads/postclickexperience/type/nativevideo/NativeVideoActivity;"
+        )
+
+        for (paywallClassDef in fullScreenActivitiesToFinish) {
             try {
                 val clazz = mutableClassDefBy(paywallClassDef)
                 for (method in clazz.methods) {
@@ -92,7 +99,6 @@ val truecallerPromotionalNeutralizePatch = bytecodePatch(
                                 0,
                                 """
                                     invoke-virtual {p0}, Landroid/app/Activity;->finish()V
-                                    return-void
                                 """.trimIndent(),
                             )
                         }

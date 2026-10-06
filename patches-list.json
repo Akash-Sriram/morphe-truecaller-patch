@@ -553,7 +553,7 @@
     },
     {
       "name": "Truecaller — Remove Ads",
-      "description": "Removes ads from the after-call screen, caller-ID overlay, and suppresses ad feature toggles.",
+      "description": "Neutralizes all internal and external ads, blocks ad downloading at the source of truth, and collapses ad UI containers.",
       "default": true,
       "category": null,
       "dependencies": [],
@@ -635,7 +635,7 @@
     },
     {
       "name": "Truecaller — Suppress Promotional Upsells & Paywalls",
-      "description": "Neutralizes promotional banners, incognito mode upsells, and paywall prompts across the dialer and contact views.",
+      "description": "Neutralizes promotional banners, incognito mode upsells, and paywall/ad activities across the app.",
       "default": true,
       "category": null,
       "dependencies": [],
