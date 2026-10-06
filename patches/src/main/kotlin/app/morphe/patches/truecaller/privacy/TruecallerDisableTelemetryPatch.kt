@@ -6,6 +6,7 @@ import app.morphe.patcher.extensions.InstructionExtensions.removeInstructions
 import app.morphe.patcher.patch.PatchException
 import app.morphe.patcher.patch.bytecodePatch
 import app.morphe.patches.truecaller.shared.Constants.COMPATIBILITY_TRUECALLER
+import app.morphe.patches.truecaller.shared.ensureRegisters
 import app.morphe.patches.truecaller.shared.Fingerprints.AppStartTrackerClassFingerprint
 import app.morphe.patches.truecaller.shared.Fingerprints.AppStartTrackerFingerprint
 
@@ -160,8 +161,38 @@ val truecallerDisableTelemetryPatch = bytecodePatch(
                     if (method.implementation != null) {
                         method.addInstructions(0, "return-void")
                     }
+                } else if (method.name == "f" && method.returnType == "Z") {
+                    if (method.implementation != null) {
+                        method.ensureRegisters(1)
+                        method.addInstructions(
+                            0,
+                            """
+                                const/4 v0, 0x1
+                                return v0
+                            """.trimIndent(),
+                        )
+                    }
+                }
+            }
+        } catch (_: Exception) { /* fail-soft */ }
+
+        try {
+            val lp4Class = mutableClassDefBy("Llp4;")
+            for (method in lp4Class.methods) {
+                if (method.name == "d" && method.returnType == "Z") {
+                    if (method.implementation != null) {
+                        method.ensureRegisters(1)
+                        method.addInstructions(
+                            0,
+                            """
+                                const/4 v0, 0x1
+                                return v0
+                            """.trimIndent(),
+                        )
+                    }
                 }
             }
         } catch (_: Exception) { /* fail-soft */ }
     }
 }
+
