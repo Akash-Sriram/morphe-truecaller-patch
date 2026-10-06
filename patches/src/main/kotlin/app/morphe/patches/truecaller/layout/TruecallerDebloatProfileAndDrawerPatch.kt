@@ -1,9 +1,13 @@
 package app.morphe.patches.truecaller.layout
 
 import app.morphe.patcher.extensions.InstructionExtensions.addInstructions
+import app.morphe.patcher.extensions.InstructionExtensions.instructions
 import app.morphe.patcher.patch.bytecodePatch
 import app.morphe.patches.truecaller.shared.Constants.COMPATIBILITY_TRUECALLER
 import app.morphe.patches.truecaller.shared.ensureRegisters
+import com.android.tools.smali.dexlib2.Opcode
+import com.android.tools.smali.dexlib2.iface.instruction.ReferenceInstruction
+import com.android.tools.smali.dexlib2.iface.instruction.TwoRegisterInstruction
 
 /**
  * Strips non-core bloat services and upsells from Users Home & Drawer menu:
@@ -30,9 +34,9 @@ val truecallerDebloatProfileAndDrawerPatch = bytecodePatch(
 
     execute {
         // 1. Hook MenuItem.access$getOtherItems$cp() to return only:
-        //    Group 0: SETTINGS, BACKUP, CHANGE_APP_THEME (indices 0, 1, 2)
+        //    Group 0: BACKUP, CHANGE_APP_THEME (indices 1, 2) — SETTINGS dropped (duplicate of toolbar gear)
         //    Group 1: HELP (index 2 of Group 1)
-        //    Removing: ANDROID_WATCH, GOVERNMENT_SERVICES, INVITE_FRIENDS, CONNECT_WITH_US
+        //    Removing: SETTINGS (dup), ANDROID_WATCH, GOVERNMENT_SERVICES, INVITE_FRIENDS, CONNECT_WITH_US
         try {
             val menuItemClass = mutableClassDefBy("Lcom/truecaller/usershome/presentaion/ui/components/menuitems/MenuItem;")
             for (method in menuItemClass.methods) {
@@ -47,7 +51,7 @@ val truecallerDebloatProfileAndDrawerPatch = bytecodePatch(
                                 invoke-interface {v0, v1}, Ljava/util/List;->get(I)Ljava/lang/Object;
                                 move-result-object v1
                                 check-cast v1, Ljava/util/List;
-                                const/4 v2, 0x0
+                                const/4 v2, 0x1
                                 const/4 v3, 0x3
                                 invoke-interface {v1, v2, v3}, Ljava/util/List;->subList(II)Ljava/util/List;
                                 move-result-object v1
@@ -125,6 +129,27 @@ val truecallerDebloatProfileAndDrawerPatch = bytecodePatch(
                                 return-void
                             """.trimIndent(),
                         )
+                    }
+                }
+            }
+        } catch (_: Exception) { /* fail-soft */ }
+
+        // 4. Remove "Get verified" button from the profile screen.
+        //    In Lvp70;->D the action list is built: Lbp (Edit profile) is always added, then
+        //    `if (ri70.h) add(Lcp(...))` adds Get verified. Force the read of Lri70;->h:Z to false.
+        try {
+            val vp70Class = mutableClassDefBy("Lvp70;")
+            for (method in vp70Class.methods) {
+                if (method.name != "D" || method.implementation == null) continue
+                val instrs = method.instructions.toList()
+                for (i in instrs.indices) {
+                    val ins = instrs[i]
+                    if (ins.opcode == Opcode.IGET_BOOLEAN && ins is ReferenceInstruction &&
+                        ins.reference.toString() == "Lri70;->h:Z"
+                    ) {
+                        val reg = (ins as TwoRegisterInstruction).registerA
+                        method.addInstructions(i + 1, "const/4 v$reg, 0x0")
+                        break
                     }
                 }
             }

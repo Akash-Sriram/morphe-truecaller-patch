@@ -145,6 +145,7 @@ val truecallerDebloatSettingsCategoriesPatch = bytecodePatch(
                                 if-nez v0, :cond_strip_crown
                                 goto :cond_check_privacy_a
                                 :cond_strip_crown
+                                const/4 p4, 0x0
                                 const/4 p5, 0x0
                                 const/4 p8, 0x0
 
