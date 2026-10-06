@@ -119,5 +119,49 @@ val truecallerDisableTelemetryPatch = bytecodePatch(
                 }
             } catch (_: Exception) { /* fail-soft */ }
         }
+
+        // 6. Enforce One-Way Presence (Ghost Mode): neutralizes uploading own status
+        //    Llbx;->U (SetPresence) returns empty protobuf success Lh920;->b()Lh920;
+        //    Llbx;->T (SetLastSeen) returns empty protobuf success Ld920;->b()Ld920;
+        //    Lybx;->h(AvailabilityTrigger, boolean) becomes return-void
+        try {
+            val lbxClass = mutableClassDefBy("Llbx;")
+            for (method in lbxClass.methods) {
+                if (method.name == "U" && method.returnType == "Ljava/lang/Object;") {
+                    if (method.implementation != null) {
+                        method.addInstructions(
+                            0,
+                            """
+                                invoke-static {}, Lh920;->b()Lh920;
+                                move-result-object v0
+                                return-object v0
+                            """.trimIndent(),
+                        )
+                    }
+                } else if (method.name == "T" && method.returnType == "Ljava/lang/Object;") {
+                    if (method.implementation != null) {
+                        method.addInstructions(
+                            0,
+                            """
+                                invoke-static {}, Ld920;->b()Ld920;
+                                move-result-object v0
+                                return-object v0
+                            """.trimIndent(),
+                        )
+                    }
+                }
+            }
+        } catch (_: Exception) { /* fail-soft */ }
+
+        try {
+            val ybxClass = mutableClassDefBy("Lybx;")
+            for (method in ybxClass.methods) {
+                if (method.name == "h" && method.returnType == "V") {
+                    if (method.implementation != null) {
+                        method.addInstructions(0, "return-void")
+                    }
+                }
+            }
+        } catch (_: Exception) { /* fail-soft */ }
     }
 }

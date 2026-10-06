@@ -188,7 +188,7 @@
     },
     {
       "name": "Truecaller — Debloat Settings Categories",
-      "description": "Removes AI Call Assistant, Premium Store, Wear OS Watch, Voicemail, Video Caller ID, Privacy Center telemetry toggles, and Assistant spam handling.",
+      "description": "Removes AI Call Assistant, Premium Store, Wear OS Watch, Voicemail, Video Caller ID, Privacy Center telemetry toggles, Assistant spam handling, and Google Drive Backup.",
       "default": true,
       "category": null,
       "dependencies": [],

@@ -5,6 +5,7 @@ import app.morphe.patcher.extensions.InstructionExtensions.instructions
 import app.morphe.patcher.extensions.InstructionExtensions.removeInstructions
 import app.morphe.patcher.patch.bytecodePatch
 import app.morphe.patches.truecaller.shared.Constants.COMPATIBILITY_TRUECALLER
+import app.morphe.patches.truecaller.shared.ensureRegisters
 import com.android.tools.smali.dexlib2.iface.instruction.ReferenceInstruction
 
 /**
@@ -19,11 +20,12 @@ import com.android.tools.smali.dexlib2.iface.instruction.ReferenceInstruction
  *  - Suppresses telemetry/surveillance toggles in Privacy Center (ControlAds, AnonymizedData,
  *    FraudMessageLogging, Supernova, VerifiedBusinessCallLogs, BizPrivacyVCEventsToggle, PublicationCertificate)
  *  - Suppresses "Let Assistant answer" in Spam Protection settings (Lr6y.k)
+ *  - Google Drive Backup in General Settings (GeneralSettings${'$'}Backup, BackupSmsBanner, BackupStorageFullBanner)
  */
 @Suppress("unused")
 val truecallerDebloatSettingsCategoriesPatch = bytecodePatch(
     name = "Truecaller — Debloat Settings Categories",
-    description = "Removes AI Call Assistant, Premium Store, Wear OS Watch, Voicemail, Video Caller ID, Privacy Center telemetry toggles, and Assistant spam handling.",
+    description = "Removes AI Call Assistant, Premium Store, Wear OS Watch, Voicemail, Video Caller ID, Privacy Center telemetry toggles, Assistant spam handling, and Google Drive Backup.",
     default = true,
 ) {
     compatibleWith(COMPATIBILITY_TRUECALLER)
@@ -56,7 +58,7 @@ val truecallerDebloatSettingsCategoriesPatch = bytecodePatch(
 
         // 2. Suppress Category sections in Lkux;->z
         // Signature: Lkux;->z(Lx6a;Lcom/truecaller/settings/impl/framework/ui/model/CategoryType;Lgf50;Ljava/lang/Integer;Lkotlin/jvm/functions/Function1;I)V
-        // Targets: GeneralSettings$Shortcuts, CallsSettings$VideoCallerIdOptions, HelpSettings$Rate
+        // Targets: GeneralSettings$Shortcuts, CallsSettings$VideoCallerIdOptions, HelpSettings$Rate, GeneralSettings$Backup
         try {
             val kuxClass = mutableClassDefBy("Lkux;")
             for (method in kuxClass.methods) {
@@ -64,6 +66,7 @@ val truecallerDebloatSettingsCategoriesPatch = bytecodePatch(
                     method.parameterTypes[1] == "Lcom/truecaller/settings/impl/framework/ui/model/CategoryType;"
                 ) {
                     if (method.implementation != null) {
+                        method.ensureRegisters(2)
                         method.addInstructions(
                             0,
                             """
@@ -73,6 +76,12 @@ val truecallerDebloatSettingsCategoriesPatch = bytecodePatch(
                                 instance-of v0, p1, Lcom/truecaller/settings/impl/ui/calls/CallsSettings${'$'}VideoCallerIdOptions${'$'}Companion;
                                 if-nez v0, :cond_suppress_z
                                 instance-of v0, p1, Lcom/truecaller/settings/impl/ui/help/HelpSettings${'$'}Rate${'$'}Companion;
+                                if-nez v0, :cond_suppress_z
+                                instance-of v0, p1, Lcom/truecaller/settings/impl/ui/general/GeneralSettings${'$'}Backup;
+                                if-nez v0, :cond_suppress_z
+                                instance-of v0, p1, Lcom/truecaller/settings/impl/ui/general/GeneralSettings${'$'}BackupSmsBanner;
+                                if-nez v0, :cond_suppress_z
+                                instance-of v0, p1, Lcom/truecaller/settings/impl/ui/general/GeneralSettings${'$'}BackupStorageFullBanner;
                                 if-nez v0, :cond_suppress_z
                                 goto :cond_pass_z
                                 :cond_suppress_z
@@ -85,16 +94,23 @@ val truecallerDebloatSettingsCategoriesPatch = bytecodePatch(
 
                 // 3. Suppress Row / Card items in Lkux;->r
                 // Signature: Lkux;->r(Lfc40;Lcom/truecaller/settings/impl/framework/ui/model/CategoryType;Lkotlin/jvm/functions/Function1;)V
-                // Targets: CallsSettings$VideoCallerIdOptions$Appearance
+                // Targets: CallsSettings$VideoCallerIdOptions$Appearance, GeneralSettings$Backup
                 if (method.name == "r" && method.parameterTypes.size == 3 &&
                     method.parameterTypes[1] == "Lcom/truecaller/settings/impl/framework/ui/model/CategoryType;"
                 ) {
                     if (method.implementation != null) {
+                        method.ensureRegisters(2)
                         method.addInstructions(
                             0,
                             """
                                 if-eqz p1, :cond_pass_r
                                 instance-of v0, p1, Lcom/truecaller/settings/impl/ui/calls/CallsSettings${'$'}VideoCallerIdOptions${'$'}Appearance;
+                                if-nez v0, :cond_suppress_r
+                                instance-of v0, p1, Lcom/truecaller/settings/impl/ui/general/GeneralSettings${'$'}Backup;
+                                if-nez v0, :cond_suppress_r
+                                instance-of v0, p1, Lcom/truecaller/settings/impl/ui/general/GeneralSettings${'$'}BackupSmsBanner;
+                                if-nez v0, :cond_suppress_r
+                                instance-of v0, p1, Lcom/truecaller/settings/impl/ui/general/GeneralSettings${'$'}BackupStorageFullBanner;
                                 if-nez v0, :cond_suppress_r
                                 goto :cond_pass_r
                                 :cond_suppress_r
@@ -105,13 +121,40 @@ val truecallerDebloatSettingsCategoriesPatch = bytecodePatch(
                     }
                 }
 
+                // 3b. Suppress list items in Lkux;->w
+                // Signature: Lkux;->w(Ldc40;Lcom/truecaller/settings/impl/framework/ui/model/CategoryType;Lgf50;Ljava/lang/Integer;)V
+                if (method.name == "w" && method.parameterTypes.size == 4 &&
+                    method.parameterTypes[1] == "Lcom/truecaller/settings/impl/framework/ui/model/CategoryType;"
+                ) {
+                    if (method.implementation != null) {
+                        method.ensureRegisters(2)
+                        method.addInstructions(
+                            0,
+                            """
+                                if-eqz p1, :cond_pass_w
+                                instance-of v0, p1, Lcom/truecaller/settings/impl/ui/general/GeneralSettings${'$'}Backup;
+                                if-nez v0, :cond_suppress_w
+                                instance-of v0, p1, Lcom/truecaller/settings/impl/ui/general/GeneralSettings${'$'}BackupSmsBanner;
+                                if-nez v0, :cond_suppress_w
+                                instance-of v0, p1, Lcom/truecaller/settings/impl/ui/general/GeneralSettings${'$'}BackupStorageFullBanner;
+                                if-nez v0, :cond_suppress_w
+                                goto :cond_pass_w
+                                :cond_suppress_w
+                                return-void
+                                :cond_pass_w
+                            """.trimIndent(),
+                        )
+                    }
+                }
+
                 // 4. Suppress Navigation items in Lkux;->E
                 // Signature: Lkux;->E(Lfc40;Lcom/truecaller/settings/impl/framework/ui/model/CategoryType;Lgf50;Ljava/lang/Integer;Lif50;Ljf20;Lgf50;I)V
-                // Targets: HelpSettings$Rate$RateOnGooglePlay, HelpSettings$Support$TruetalksCommunity, PrivacySettings$Activity$ControlAds
+                // Targets: HelpSettings$Rate$RateOnGooglePlay, HelpSettings$Support$TruetalksCommunity, PrivacySettings$Activity$ControlAds, GeneralSettings$Backup
                 if (method.name == "E" && method.parameterTypes.size == 8 &&
                     method.parameterTypes[1] == "Lcom/truecaller/settings/impl/framework/ui/model/CategoryType;"
                 ) {
                     if (method.implementation != null) {
+                        method.ensureRegisters(2)
                         method.addInstructions(
                             0,
                             """
@@ -122,6 +165,12 @@ val truecallerDebloatSettingsCategoriesPatch = bytecodePatch(
                                 if-nez v0, :cond_suppress_e
                                 instance-of v0, p1, Lcom/truecaller/settings/impl/ui/privacy/PrivacySettings${'$'}Activity${'$'}ControlAds;
                                 if-nez v0, :cond_suppress_e
+                                instance-of v0, p1, Lcom/truecaller/settings/impl/ui/general/GeneralSettings${'$'}Backup;
+                                if-nez v0, :cond_suppress_e
+                                instance-of v0, p1, Lcom/truecaller/settings/impl/ui/general/GeneralSettings${'$'}BackupSmsBanner;
+                                if-nez v0, :cond_suppress_e
+                                instance-of v0, p1, Lcom/truecaller/settings/impl/ui/general/GeneralSettings${'$'}BackupStorageFullBanner;
+                                if-nez v0, :cond_suppress_e
                                 goto :cond_pass_e
                                 :cond_suppress_e
                                 return-void
@@ -131,12 +180,13 @@ val truecallerDebloatSettingsCategoriesPatch = bytecodePatch(
                     }
                 }
 
-                // 5. Strip Crown Badge on HideAcsForNonPbContacts & Suppress Privacy Telemetry in Lkux;->A
+                // 5. Strip Crown Badge on HideAcsForNonPbContacts & Suppress Privacy Telemetry & Backup in Lkux;->A
                 // Signature: Lkux;->A(Lfc40;Lcom/truecaller/settings/impl/framework/ui/model/CategoryType;Lgf50;Lgf50;Lgf50;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljf20;Lgf50;Lgf50;I)V
                 if (method.name == "A" && method.parameterTypes.size == 13 &&
                     method.parameterTypes[1] == "Lcom/truecaller/settings/impl/framework/ui/model/CategoryType;"
                 ) {
                     if (method.implementation != null) {
+                        method.ensureRegisters(2)
                         method.addInstructions(
                             0,
                             """
@@ -163,6 +213,12 @@ val truecallerDebloatSettingsCategoriesPatch = bytecodePatch(
                                 instance-of v0, p1, Lcom/truecaller/settings/impl/ui/privacy/PrivacySettings${'$'}Activity${'$'}BizPrivacyVCEventsToggle;
                                 if-nez v0, :cond_suppress_a
                                 instance-of v0, p1, Lcom/truecaller/settings/impl/ui/privacy/PrivacySettings${'$'}ManageData${'$'}PublicationCertificate;
+                                if-nez v0, :cond_suppress_a
+                                instance-of v0, p1, Lcom/truecaller/settings/impl/ui/general/GeneralSettings${'$'}Backup;
+                                if-nez v0, :cond_suppress_a
+                                instance-of v0, p1, Lcom/truecaller/settings/impl/ui/general/GeneralSettings${'$'}BackupSmsBanner;
+                                if-nez v0, :cond_suppress_a
+                                instance-of v0, p1, Lcom/truecaller/settings/impl/ui/general/GeneralSettings${'$'}BackupStorageFullBanner;
                                 if-nez v0, :cond_suppress_a
                                 goto :cond_pass_a
 

@@ -33,43 +33,18 @@ val truecallerDebloatProfileAndDrawerPatch = bytecodePatch(
     compatibleWith(COMPATIBILITY_TRUECALLER)
 
     execute {
-        // 1. Hook MenuItem.access$getOtherItems$cp() to return only:
-        //    Group 0: BACKUP, CHANGE_APP_THEME (indices 1, 2) — SETTINGS dropped (duplicate of toolbar gear)
-        //    Group 1: HELP (index 2 of Group 1)
-        //    Removing: SETTINGS (dup), ANDROID_WATCH, GOVERNMENT_SERVICES, INVITE_FRIENDS, CONNECT_WITH_US
+        // 1. Hook MenuItem.access$getOtherItems$cp() to return an empty list
+        //    All options (Settings, Theme, Help, Backup) are either in the toolbar, in SettingsActivity, or non-functional.
         try {
             val menuItemClass = mutableClassDefBy("Lcom/truecaller/usershome/presentaion/ui/components/menuitems/MenuItem;")
             for (method in menuItemClass.methods) {
                 if (method.name == "access${'$'}getOtherItems${'$'}cp" && method.returnType == "Ljava/util/List;") {
                     if (method.implementation != null) {
-                        method.ensureRegisters(6)
+                        method.ensureRegisters(2)
                         method.addInstructions(
                             0,
                             """
-                                sget-object v0, Lcom/truecaller/usershome/presentaion/ui/components/menuitems/MenuItem;->otherItems:Ljava/util/List;
-                                const/4 v1, 0x0
-                                invoke-interface {v0, v1}, Ljava/util/List;->get(I)Ljava/lang/Object;
-                                move-result-object v1
-                                check-cast v1, Ljava/util/List;
-                                const/4 v2, 0x1
-                                const/4 v3, 0x3
-                                invoke-interface {v1, v2, v3}, Ljava/util/List;->subList(II)Ljava/util/List;
-                                move-result-object v1
-                                const/4 v2, 0x1
-                                invoke-interface {v0, v2}, Ljava/util/List;->get(I)Ljava/lang/Object;
-                                move-result-object v2
-                                check-cast v2, Ljava/util/List;
-                                const/4 v3, 0x2
-                                const/4 v4, 0x3
-                                invoke-interface {v2, v3, v4}, Ljava/util/List;->subList(II)Ljava/util/List;
-                                move-result-object v2
-                                const/4 v0, 0x2
-                                new-array v0, v0, [Ljava/util/List;
-                                const/4 v3, 0x0
-                                aput-object v1, v0, v3
-                                const/4 v3, 0x1
-                                aput-object v2, v0, v3
-                                invoke-static {v0}, Ljava/util/Arrays;->asList([Ljava/lang/Object;)Ljava/util/List;
+                                invoke-static {}, Ljava/util/Collections;->emptyList()Ljava/util/List;
                                 move-result-object v0
                                 return-object v0
                             """.trimIndent(),
