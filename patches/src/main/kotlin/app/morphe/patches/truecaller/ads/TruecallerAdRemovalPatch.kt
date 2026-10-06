@@ -42,20 +42,6 @@ val truecallerAdRemovalPatch = bytecodePatch(
                         """.trimIndent(),
                     )
                 }
-
-                // c(PremiumFeature, boolean) -> boolean (isFeatureAvailable)
-                if (method.name == "c" && method.returnType == "Z" && method.parameterTypes.size == 2) {
-                    method.addInstructions(
-                        0,
-                        """
-                            sget-object v0, Lcom/truecaller/premium/data/feature/PremiumFeature;->NO_ADS:Lcom/truecaller/premium/data/feature/PremiumFeature;
-                            if-ne p1, v0, :cond_check_orig
-                            const/4 v0, 0x1
-                            return v0
-                            :cond_check_orig
-                        """.trimIndent(),
-                    )
-                }
             }
         } catch (_: Exception) { /* fail-soft */ }
 

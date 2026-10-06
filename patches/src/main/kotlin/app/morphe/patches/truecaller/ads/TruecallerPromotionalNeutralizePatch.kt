@@ -75,11 +75,8 @@ val truecallerPromotionalNeutralizePatch = bytecodePatch(
             }
         } catch (_: Exception) { /* fail-soft */ }
 
-        // 4. Paywall & Full-Screen Ad Activities Immediate Finish
+        // 4. Full-Screen Ad Activities Immediate Finish
         val fullScreenActivitiesToFinish = listOf(
-            "Lcom/truecaller/premium/FullScreenPaywallActivity;",
-            "Lcom/truecaller/premium/UpgradePathPaywallActivity;",
-            "Lcom/truecaller/premium/NavDrawerPaywallActivity;",
             "Lcom/truecaller/ads/adsrouter/ui/interstitial/AdRouterInterstitialActivity;",
             "Lcom/truecaller/ads/adsrouter/ui/offers/AdOffersActivity;",
             "Lcom/truecaller/ads/rewarded/WhoViewedMeAdActivity;",

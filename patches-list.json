@@ -86,10 +86,11 @@
     },
     {
       "name": "Truecaller — Core Privacy & Minimalist Bundle",
-      "description": "Enables complete telemetry suppression, background worker neutralization, ad removal, 15 SDK killers, bloat tab removal, permission nag gate bypass, silent SMS suppression, air-gapped insights, and SMS OTP login.",
+      "description": "Enables complete telemetry suppression, background worker neutralization, ad removal, 15 SDK killers, bloat tab removal, permission nag gate bypass, silent SMS suppression, air-gapped insights, SMS OTP login, and Max Spam Protection.",
       "default": true,
       "category": null,
       "dependencies": [
+        "BytecodePatch",
         "BytecodePatch",
         "BytecodePatch",
         "BytecodePatch",
@@ -390,6 +391,47 @@
     {
       "name": "Truecaller — Hide Scams Tab",
       "description": "Hides the Scams tab from the bottom navigation bar.",
+      "default": true,
+      "category": null,
+      "dependencies": [],
+      "compatiblePackages": [
+        {
+          "packageName": "com.truecaller",
+          "name": "Truecaller",
+          "description": null,
+          "apkFileType": "APKM",
+          "appIconColor": "#005AF0",
+          "signatures": null,
+          "targets": [
+            {
+              "version": "26.10.6",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": 24,
+              "description": null
+            },
+            {
+              "version": "26.12.5",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": 24,
+              "description": null
+            },
+            {
+              "version": "26.39.6",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": 24,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
+      "name": "Truecaller — Max Protection & Advanced Spam Blocking",
+      "description": "Enables Max Protection spam tier, unlimited offline spam list updates, Neighbor Spoofing detection, and Number Series Prefix Blocking.",
       "default": true,
       "category": null,
       "dependencies": [],

@@ -52,12 +52,7 @@ val truecallerWorkerNeutralizePatch = bytecodePatch(
             "Lcom/truecaller/familyprotect/FamilyProtectFetchConfigWorker;",
             "Lcom/truecaller/scamfeed/ScamFeedNotificationWorker;",
             "Lcom/truecaller/rewardprogram/RewardProgramNotificationOneTimeWorker;",
-            "Lcom/truecaller/background_work/JointActionsWorker;",
-            "Lcom/truecaller/background_work/StandaloneActionWorker;",
-            "Lcom/truecaller/background_work/StartupActionsWorker;",
-            "Lcom/truecaller/backup/worker/BackupWorker;",
-            "Lcom/truecaller/background_work/TrackedCoroutineWorker;",
-            "Lcom/truecaller/background_work/TrackedWorker;"
+            "Lcom/truecaller/backup/worker/BackupWorker;"
         )
 
         // AndroidX WorkManager success result return instruction snippet
