@@ -147,7 +147,7 @@
     },
     {
       "name": "Truecaller — Debloat Profile & Drawer Services",
-      "description": "No-op: prior implementation caused VerifyError due to register allocation mismatch in access$getOtherItems$cp.",
+      "description": "Removes Fraud Insurance, Premium upsell banners, Government Services, Invite Friends, and Android Watch from profile menu while preserving stats.",
       "default": true,
       "category": null,
       "dependencies": [],

@@ -44,5 +44,28 @@ val truecallerDebloatSettingsCategoriesPatch = bytecodePatch(
                 }
             }
         } catch (_: Exception) { /* fail-soft */ }
+
+        // 2. Suppress "Home Shortcuts" from General Settings
+        // Signature: Lkux;->z(Lx6a;Lcom/truecaller/settings/impl/framework/ui/model/CategoryType;Lgf50;Ljava/lang/Integer;Lkotlin/jvm/functions/Function1;I)V
+        try {
+            val kuxClass = mutableClassDefBy("Lkux;")
+            for (method in kuxClass.methods) {
+                if (method.name == "z" && method.parameterTypes.size == 6 &&
+                    method.parameterTypes[1] == "Lcom/truecaller/settings/impl/framework/ui/model/CategoryType;"
+                ) {
+                    if (method.implementation != null) {
+                        method.addInstructions(
+                            0,
+                            """
+                                instance-of v0, p1, Lcom/truecaller/settings/impl/ui/general/GeneralSettings${'$'}Shortcuts${'$'}Companion;
+                                if-eqz v0, :cond_shortcuts_pass
+                                return-void
+                                :cond_shortcuts_pass
+                            """.trimIndent(),
+                        )
+                    }
+                }
+            }
+        } catch (_: Exception) { /* fail-soft */ }
     }
 }

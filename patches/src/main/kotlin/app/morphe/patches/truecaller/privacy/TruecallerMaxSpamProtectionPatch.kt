@@ -51,6 +51,8 @@ val truecallerMaxSpamProtectionPatch = bytecodePatch(
                             if-eq p1, v0, :cond_c_is_premium
                             sget-object v0, Lcom/truecaller/premium/data/feature/PremiumFeature;->WHO_SEARCHED_FOR_ME:Lcom/truecaller/premium/data/feature/PremiumFeature;
                             if-eq p1, v0, :cond_c_is_premium
+                            sget-object v0, Lcom/truecaller/premium/data/feature/PremiumFeature;->ANNOUNCE_CALL:Lcom/truecaller/premium/data/feature/PremiumFeature;
+                            if-eq p1, v0, :cond_c_is_premium
                             goto :cond_c_pass
                             :cond_c_is_premium
                             const/4 v0, 0x1
@@ -76,6 +78,8 @@ val truecallerMaxSpamProtectionPatch = bytecodePatch(
                             sget-object v0, Lcom/truecaller/premium/data/feature/PremiumFeature;->INCOGNITO_MODE:Lcom/truecaller/premium/data/feature/PremiumFeature;
                             if-eq p1, v0, :cond_de_is_premium
                             sget-object v0, Lcom/truecaller/premium/data/feature/PremiumFeature;->WHO_SEARCHED_FOR_ME:Lcom/truecaller/premium/data/feature/PremiumFeature;
+                            if-eq p1, v0, :cond_de_is_premium
+                            sget-object v0, Lcom/truecaller/premium/data/feature/PremiumFeature;->ANNOUNCE_CALL:Lcom/truecaller/premium/data/feature/PremiumFeature;
                             if-eq p1, v0, :cond_de_is_premium
                             goto :cond_de_pass
                             :cond_de_is_premium
@@ -111,6 +115,8 @@ val truecallerMaxSpamProtectionPatch = bytecodePatch(
                                 sget-object v0, Lcom/truecaller/premium/data/feature/PremiumFeature;->INCOGNITO_MODE:Lcom/truecaller/premium/data/feature/PremiumFeature;
                                 if-eq p1, v0, :cond_npw_is_premium
                                 sget-object v0, Lcom/truecaller/premium/data/feature/PremiumFeature;->WHO_SEARCHED_FOR_ME:Lcom/truecaller/premium/data/feature/PremiumFeature;
+                                if-eq p1, v0, :cond_npw_is_premium
+                                sget-object v0, Lcom/truecaller/premium/data/feature/PremiumFeature;->ANNOUNCE_CALL:Lcom/truecaller/premium/data/feature/PremiumFeature;
                                 if-eq p1, v0, :cond_npw_is_premium
                                 goto :cond_npw_pass
                                 :cond_npw_is_premium
