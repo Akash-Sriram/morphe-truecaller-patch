@@ -40,16 +40,23 @@ val truecallerMaxSpamProtectionPatch = bytecodePatch(
                     method.addInstructions(
                         0,
                         """
+                            if-nez p1, :cond_c_pass
                             sget-object v0, Lcom/truecaller/premium/data/feature/PremiumFeature;->EXTENDED_SPAM_BLOCKING:Lcom/truecaller/premium/data/feature/PremiumFeature;
                             if-eq p1, v0, :cond_c_is_premium
                             sget-object v0, Lcom/truecaller/premium/data/feature/PremiumFeature;->SPAM_BLOCKING:Lcom/truecaller/premium/data/feature/PremiumFeature;
                             if-eq p1, v0, :cond_c_is_premium
                             sget-object v0, Lcom/truecaller/premium/data/feature/PremiumFeature;->NO_ADS:Lcom/truecaller/premium/data/feature/PremiumFeature;
-                            if-ne p1, v0, :cond_c_pass
+                            if-eq p1, v0, :cond_c_is_premium
+                            sget-object v0, Lcom/truecaller/premium/data/feature/PremiumFeature;->INCOGNITO_MODE:Lcom/truecaller/premium/data/feature/PremiumFeature;
+                            if-eq p1, v0, :cond_c_is_premium
+                            sget-object v0, Lcom/truecaller/premium/data/feature/PremiumFeature;->WHO_SEARCHED_FOR_ME:Lcom/truecaller/premium/data/feature/PremiumFeature;
+                            if-eq p1, v0, :cond_c_is_premium
+                            goto :cond_c_pass
                             :cond_c_is_premium
                             const/4 v0, 0x1
                             return v0
                             :cond_c_pass
+                            nop
                         """.trimIndent(),
                     )
                 } else if ((method.name == "d" || method.name == "e") && method.parameterTypes.size == 1 &&
@@ -59,50 +66,30 @@ val truecallerMaxSpamProtectionPatch = bytecodePatch(
                     method.addInstructions(
                         0,
                         """
+                            if-nez p1, :cond_de_pass
                             sget-object v0, Lcom/truecaller/premium/data/feature/PremiumFeature;->EXTENDED_SPAM_BLOCKING:Lcom/truecaller/premium/data/feature/PremiumFeature;
                             if-eq p1, v0, :cond_de_is_premium
                             sget-object v0, Lcom/truecaller/premium/data/feature/PremiumFeature;->SPAM_BLOCKING:Lcom/truecaller/premium/data/feature/PremiumFeature;
                             if-eq p1, v0, :cond_de_is_premium
                             sget-object v0, Lcom/truecaller/premium/data/feature/PremiumFeature;->NO_ADS:Lcom/truecaller/premium/data/feature/PremiumFeature;
-                            if-ne p1, v0, :cond_de_pass
+                            if-eq p1, v0, :cond_de_is_premium
+                            sget-object v0, Lcom/truecaller/premium/data/feature/PremiumFeature;->INCOGNITO_MODE:Lcom/truecaller/premium/data/feature/PremiumFeature;
+                            if-eq p1, v0, :cond_de_is_premium
+                            sget-object v0, Lcom/truecaller/premium/data/feature/PremiumFeature;->WHO_SEARCHED_FOR_ME:Lcom/truecaller/premium/data/feature/PremiumFeature;
+                            if-eq p1, v0, :cond_de_is_premium
+                            goto :cond_de_pass
                             :cond_de_is_premium
                             const/4 v0, 0x1
                             return v0
                             :cond_de_pass
+                            nop
                         """.trimIndent(),
                     )
                 }
             }
         } catch (_: Exception) { /* fail-soft */ }
 
-        // 2. Hook static helper Lnpw;->t(Ljyw;Lcom/truecaller/premium/data/feature/PremiumFeature;)Z
-        try {
-            val npwClass = mutableClassDefBy("Lnpw;")
-            for (method in npwClass.methods) {
-                if (method.name == "t" && method.parameterTypes.size == 2 &&
-                    method.parameterTypes[1] == "Lcom/truecaller/premium/data/feature/PremiumFeature;" &&
-                    method.returnType == "Z"
-                ) {
-                    if (method.implementation != null) {
-                        method.addInstructions(
-                            0,
-                            """
-                                sget-object v0, Lcom/truecaller/premium/data/feature/PremiumFeature;->EXTENDED_SPAM_BLOCKING:Lcom/truecaller/premium/data/feature/PremiumFeature;
-                                if-eq p1, v0, :cond_npw_is_premium
-                                sget-object v0, Lcom/truecaller/premium/data/feature/PremiumFeature;->SPAM_BLOCKING:Lcom/truecaller/premium/data/feature/PremiumFeature;
-                                if-eq p1, v0, :cond_npw_is_premium
-                                sget-object v0, Lcom/truecaller/premium/data/feature/PremiumFeature;->NO_ADS:Lcom/truecaller/premium/data/feature/PremiumFeature;
-                                if-ne p1, v0, :cond_npw_pass
-                                :cond_npw_is_premium
-                                const/4 v0, 0x1
-                                return v0
-                                :cond_npw_pass
-                            """.trimIndent(),
-                        )
-                    }
-                }
-            }
-        } catch (_: Exception) { /* fail-soft */ }
+// 2. Note: Lnpw;->t delegates directly to Lmyw;->c (no separate hook needed)
 
         // 3. Hook Block Settings Presenter Lfe6;->l()Z and Lfe6;->m()Z
         try {
@@ -227,7 +214,7 @@ val truecallerMaxSpamProtectionPatch = bytecodePatch(
                         method.addInstructions(
                             0,
                             """
-                                if-nez p1, :cond_toggle_pass
+                                if-eqz p1, :cond_toggle_pass
                                 const-string v0, "featureNumberSeriesBlocking"
                                 invoke-virtual {p1, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
                                 move-result v0
@@ -242,6 +229,7 @@ val truecallerMaxSpamProtectionPatch = bytecodePatch(
                                 const/4 v0, 0x0
                                 return v0
                                 :cond_toggle_pass
+                                nop
                             """.trimIndent(),
                         )
                     }

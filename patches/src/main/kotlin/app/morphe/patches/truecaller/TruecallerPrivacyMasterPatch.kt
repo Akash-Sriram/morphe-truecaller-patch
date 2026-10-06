@@ -13,6 +13,7 @@ import app.morphe.patches.truecaller.privacy.truecallerBypassPermissionGatePatch
 import app.morphe.patches.truecaller.privacy.truecallerDisableSilentSmsPatch
 import app.morphe.patches.truecaller.privacy.truecallerDisableTelemetryPatch
 import app.morphe.patches.truecaller.privacy.truecallerAirGappedInsightsPatch
+import app.morphe.patches.truecaller.privacy.truecallerIncognitoModePatch
 import app.morphe.patches.truecaller.privacy.truecallerMaxSpamProtectionPatch
 import app.morphe.patches.truecaller.privacy.truecallerWorkerNeutralizePatch
 import app.morphe.patches.truecaller.privacy.truecallerNetworkBlackholePatch
@@ -27,7 +28,7 @@ import app.morphe.patches.truecaller.shared.Constants.COMPATIBILITY_TRUECALLER
 @Suppress("unused")
 val truecallerPrivacyMasterPatch = bytecodePatch(
     name = "Truecaller — Core Privacy & Minimalist Bundle",
-    description = "Enables complete telemetry suppression, background worker neutralization, ad removal, 15 SDK killers, bloat tab removal, permission nag gate bypass, silent SMS suppression, air-gapped insights, SMS OTP login, and Max Spam Protection.",
+    description = "Enables complete telemetry suppression, background worker neutralization, ad removal, 15 SDK killers, bloat tab removal, permission nag gate bypass, silent SMS suppression, air-gapped insights, SMS OTP login, Max Spam Protection, and Incognito Mode.",
     default = true,
 ) {
     compatibleWith(COMPATIBILITY_TRUECALLER)
@@ -49,6 +50,7 @@ val truecallerPrivacyMasterPatch = bytecodePatch(
         truecallerDisableSilentSmsPatch,
         truecallerAirGappedInsightsPatch,
         truecallerMaxSpamProtectionPatch,
+        truecallerIncognitoModePatch,
     )
 
     execute {
