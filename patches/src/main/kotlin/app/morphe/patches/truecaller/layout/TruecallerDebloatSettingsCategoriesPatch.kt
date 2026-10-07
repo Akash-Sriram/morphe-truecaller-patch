@@ -87,6 +87,10 @@ val truecallerDebloatSettingsCategoriesPatch = bytecodePatch(
                                 if-nez v0, :cond_suppress_z
                                 instance-of v0, p1, Lcom/truecaller/settings/impl/ui/calls/CallsSettings${'$'}Troubleshoot${'$'}Companion;
                                 if-nez v0, :cond_suppress_z
+                                instance-of v0, p1, Lcom/truecaller/settings/impl/ui/messaging/MessagingSettings${'$'}DefaultSMSApp${'$'}Companion;
+                                if-nez v0, :cond_suppress_z
+                                instance-of v0, p1, Lcom/truecaller/settings/impl/ui/messaging/MessagingSettings${'$'}DefaultSMSApp${'$'}DefaultSMSStatus;
+                                if-nez v0, :cond_suppress_z
                                 goto :cond_pass_z
                                 :cond_suppress_z
                                 return-void
@@ -126,6 +130,10 @@ val truecallerDebloatSettingsCategoriesPatch = bytecodePatch(
                                 if-nez v0, :cond_suppress_r
                                 instance-of v0, p1, Lcom/truecaller/settings/impl/ui/calls/CallsSettings${'$'}Troubleshoot${'$'}Companion;
                                 if-nez v0, :cond_suppress_r
+                                instance-of v0, p1, Lcom/truecaller/settings/impl/ui/messaging/MessagingSettings${'$'}DefaultSMSApp${'$'}Companion;
+                                if-nez v0, :cond_suppress_r
+                                instance-of v0, p1, Lcom/truecaller/settings/impl/ui/messaging/MessagingSettings${'$'}DefaultSMSApp${'$'}DefaultSMSStatus;
+                                if-nez v0, :cond_suppress_r
                                 goto :cond_pass_r
                                 :cond_suppress_r
                                 return-void
@@ -157,6 +165,10 @@ val truecallerDebloatSettingsCategoriesPatch = bytecodePatch(
                                 instance-of v0, p1, Lcom/truecaller/settings/impl/ui/calls/CallsSettings${'$'}Troubleshoot${'$'}Calls;
                                 if-nez v0, :cond_suppress_w
                                 instance-of v0, p1, Lcom/truecaller/settings/impl/ui/calls/CallsSettings${'$'}Troubleshoot${'$'}Companion;
+                                if-nez v0, :cond_suppress_w
+                                instance-of v0, p1, Lcom/truecaller/settings/impl/ui/messaging/MessagingSettings${'$'}DefaultSMSApp${'$'}Companion;
+                                if-nez v0, :cond_suppress_w
+                                instance-of v0, p1, Lcom/truecaller/settings/impl/ui/messaging/MessagingSettings${'$'}DefaultSMSApp${'$'}DefaultSMSStatus;
                                 if-nez v0, :cond_suppress_w
                                 goto :cond_pass_w
                                 :cond_suppress_w
@@ -192,6 +204,10 @@ val truecallerDebloatSettingsCategoriesPatch = bytecodePatch(
                                 instance-of v0, p1, Lcom/truecaller/settings/impl/ui/general/GeneralSettings${'$'}BackupSmsBanner${'$'}Companion;
                                 if-nez v0, :cond_suppress_e
                                 instance-of v0, p1, Lcom/truecaller/settings/impl/ui/general/GeneralSettings${'$'}BackupStorageFullBanner${'$'}Companion;
+                                if-nez v0, :cond_suppress_e
+                                instance-of v0, p1, Lcom/truecaller/settings/impl/ui/messaging/MessagingSettings${'$'}DefaultSMSApp${'$'}Companion;
+                                if-nez v0, :cond_suppress_e
+                                instance-of v0, p1, Lcom/truecaller/settings/impl/ui/messaging/MessagingSettings${'$'}DefaultSMSApp${'$'}DefaultSMSStatus;
                                 if-nez v0, :cond_suppress_e
                                 goto :cond_pass_e
                                 :cond_suppress_e
@@ -243,6 +259,10 @@ val truecallerDebloatSettingsCategoriesPatch = bytecodePatch(
                                 instance-of v0, p1, Lcom/truecaller/settings/impl/ui/general/GeneralSettings${'$'}BackupSmsBanner${'$'}Companion;
                                 if-nez v0, :cond_suppress_a
                                 instance-of v0, p1, Lcom/truecaller/settings/impl/ui/general/GeneralSettings${'$'}BackupStorageFullBanner${'$'}Companion;
+                                if-nez v0, :cond_suppress_a
+                                instance-of v0, p1, Lcom/truecaller/settings/impl/ui/messaging/MessagingSettings${'$'}DefaultSMSApp${'$'}Companion;
+                                if-nez v0, :cond_suppress_a
+                                instance-of v0, p1, Lcom/truecaller/settings/impl/ui/messaging/MessagingSettings${'$'}DefaultSMSApp${'$'}DefaultSMSStatus;
                                 if-nez v0, :cond_suppress_a
                                 goto :cond_pass_a
 

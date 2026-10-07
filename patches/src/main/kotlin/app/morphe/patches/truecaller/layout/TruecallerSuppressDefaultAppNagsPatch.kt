@@ -1,9 +1,12 @@
 package app.morphe.patches.truecaller.layout
 
 import app.morphe.patcher.extensions.InstructionExtensions.addInstructions
+import app.morphe.patcher.extensions.InstructionExtensions.instructions
+import app.morphe.patcher.extensions.InstructionExtensions.removeInstructions
 import app.morphe.patcher.patch.bytecodePatch
 import app.morphe.patches.truecaller.shared.Constants.COMPATIBILITY_TRUECALLER
 import app.morphe.patches.truecaller.shared.ensureRegisters
+import com.android.tools.smali.dexlib2.iface.instruction.ReferenceInstruction
 
 /**
  * Suppresses Default Phone App and Default SMS App nag banners and cards across Truecaller:
@@ -131,6 +134,39 @@ val truecallerSuppressDefaultAppNagsPatch = bytecodePatch(
                                 return-void
                             """.trimIndent(),
                         )
+                    }
+                }
+            }
+        } catch (_: Exception) { /* fail-soft */ }
+
+        // 6. Messages Tab Non-DMA Nag Banners & Spacer: Lbo3;->invoke(Ljava/lang/Object;)Ljava/lang/Object;
+        // Strip out the entire non-DMA banner & spacer branch (idx 685 to 731)
+        // so that non-dma-big-banner, promo-banner, and no_sms_permission-alert are never added to LazyColumn
+        try {
+            val bo3Class = mutableClassDefBy("Lbo3;")
+            for (method in bo3Class.methods) {
+                if (method.name == "invoke" && method.parameterTypes.size == 1 &&
+                    method.returnType == "Ljava/lang/Object;"
+                ) {
+                    val instrs = method.instructions.toList()
+                    var bannerCheckIdx = -1
+                    var filterTypeIdx = -1
+                    for (i in instrs.indices) {
+                        val ins = instrs[i]
+                        if (ins is ReferenceInstruction) {
+                            val ref = ins.reference.toString()
+                            if (ref.contains("Lk2d;->b:Lcom/truecaller/messaging/messaginglist/v2/model/NonDmaBannerType;")) {
+                                bannerCheckIdx = i
+                            } else if (bannerCheckIdx != -1 && filterTypeIdx == -1 && ref.contains("NON_DMA_INBOX")) {
+                                filterTypeIdx = i
+                                break
+                            }
+                        }
+                    }
+                    if (bannerCheckIdx != -1 && filterTypeIdx > bannerCheckIdx) {
+                        val start = bannerCheckIdx - 1
+                        val count = filterTypeIdx - start
+                        method.removeInstructions(start, count)
                     }
                 }
             }
