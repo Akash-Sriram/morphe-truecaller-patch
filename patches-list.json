@@ -152,6 +152,7 @@
         "BytecodePatch",
         "BytecodePatch",
         "BytecodePatch",
+        "BytecodePatch",
         "BytecodePatch"
       ],
       "compatiblePackages": [
@@ -807,6 +808,47 @@
     {
       "name": "Truecaller — Remove Ads",
       "description": "Neutralizes all internal and external ads, blocks ad downloading at the source of truth, and collapses ad UI containers.",
+      "default": true,
+      "category": null,
+      "dependencies": [],
+      "compatiblePackages": [
+        {
+          "packageName": "com.truecaller",
+          "name": "Truecaller",
+          "description": null,
+          "apkFileType": "APKM",
+          "appIconColor": "#005AF0",
+          "signatures": null,
+          "targets": [
+            {
+              "version": "26.10.6",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": 24,
+              "description": null
+            },
+            {
+              "version": "26.12.5",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": 24,
+              "description": null
+            },
+            {
+              "version": "26.39.6",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": 24,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
+      "name": "Truecaller — Settings Profile Navigation & Stats",
+      "description": "Wires profile avatar directly to Settings, profile card to Edit Profile, shows % badge, hides Help, and displays stats at the bottom of Settings.",
       "default": true,
       "category": null,
       "dependencies": [],
