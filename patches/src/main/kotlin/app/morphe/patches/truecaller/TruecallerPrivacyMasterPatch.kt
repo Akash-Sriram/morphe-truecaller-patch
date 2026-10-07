@@ -9,6 +9,8 @@ import app.morphe.patches.truecaller.layout.truecallerDebloatSettingsCategoriesP
 import app.morphe.patches.truecaller.layout.truecallerHideAssistantTabPatch
 import app.morphe.patches.truecaller.layout.truecallerHideFamilyProtectionPatch
 import app.morphe.patches.truecaller.layout.truecallerHideScamsTabPatch
+import app.morphe.patches.truecaller.layout.truecallerCleanCallsTabPatch
+import app.morphe.patches.truecaller.layout.truecallerModernDetailsViewPatch
 import app.morphe.patches.truecaller.layout.truecallerSuppressDefaultAppNagsPatch
 import app.morphe.patches.truecaller.misc.truecallerDisableUpdateNagPatch
 import app.morphe.patches.truecaller.misc.truecallerGmsSignInBypassPatch
@@ -57,6 +59,8 @@ val truecallerPrivacyMasterPatch = bytecodePatch(
         truecallerMaxSpamProtectionPatch,
         truecallerIncognitoModePatch,
         truecallerSuppressDefaultAppNagsPatch,
+        truecallerModernDetailsViewPatch,
+        truecallerCleanCallsTabPatch,
     )
 
     execute {

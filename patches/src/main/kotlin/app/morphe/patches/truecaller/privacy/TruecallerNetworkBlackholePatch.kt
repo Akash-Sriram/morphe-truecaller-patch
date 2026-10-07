@@ -54,7 +54,7 @@ val truecallerNetworkBlackholePatch = bytecodePatch(
             }
         } catch (_: Exception) { /* fail-soft */ }
 
-// 3. Blackhole KnownEndpoints.getHost() for all non-essential endpoints
+        // 3. Blackhole KnownEndpoints.getHost() for all non-essential endpoints
         try {
             val knownEndpointsClass = mutableClassDefBy("Lcom/truecaller/common/network/util/KnownEndpoints;")
             for (method in knownEndpointsClass.methods) {
@@ -83,8 +83,6 @@ val truecallerNetworkBlackholePatch = bytecodePatch(
                                 if-eq p0, v0, :cond_allowed
                                 sget-object v0, Lcom/truecaller/common/network/util/KnownEndpoints;->IMAGES:Lcom/truecaller/common/network/util/KnownEndpoints;
                                 if-eq p0, v0, :cond_allowed
-                                sget-object v0, Lcom/truecaller/common/network/util/KnownEndpoints;->PRESENCE_GRPC:Lcom/truecaller/common/network/util/KnownEndpoints;
-                                if-eq p0, v0, :cond_allowed
                                 const-string v0, "127.0.0.1"
                                 return-object v0
                                 :cond_allowed
@@ -95,7 +93,7 @@ val truecallerNetworkBlackholePatch = bytecodePatch(
             }
         } catch (_: Exception) { /* fail-soft */ }
 
-        // 4. Blackhole KnownEndpoints.url() for non-essential endpoints
+        // 2. Blackhole KnownEndpoints.url() for non-essential endpoints
         try {
             val knownEndpointsClass = mutableClassDefBy("Lcom/truecaller/common/network/util/KnownEndpoints;")
             for (method in knownEndpointsClass.methods) {
@@ -123,8 +121,6 @@ val truecallerNetworkBlackholePatch = bytecodePatch(
                                 sget-object v0, Lcom/truecaller/common/network/util/KnownEndpoints;->PROFILE:Lcom/truecaller/common/network/util/KnownEndpoints;
                                 if-eq p0, v0, :cond_allowed_url
                                 sget-object v0, Lcom/truecaller/common/network/util/KnownEndpoints;->IMAGES:Lcom/truecaller/common/network/util/KnownEndpoints;
-                                if-eq p0, v0, :cond_allowed_url
-                                sget-object v0, Lcom/truecaller/common/network/util/KnownEndpoints;->PRESENCE_GRPC:Lcom/truecaller/common/network/util/KnownEndpoints;
                                 if-eq p0, v0, :cond_allowed_url
                                 new-instance v0, Lokhttp3/HttpUrl${'$'}Builder;
                                 invoke-direct {v0}, Lokhttp3/HttpUrl${'$'}Builder;-><init>()V

@@ -265,8 +265,22 @@ val truecallerMaxSpamProtectionPatch = bytecodePatch(
                                 const-string v0, "featureBlockNeighbourSpoofingAsPremium"
                                 invoke-virtual {p1, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
                                 move-result v0
-                                if-eqz v0, :cond_toggle_pass
+                                if-eqz v0, :cond_check_wa
                                 const/4 v0, 0x0
+                                return v0
+                                :cond_check_wa
+                                const-string v0, "featureDetailsViewWhatsAppAndPayButtons"
+                                invoke-virtual {p1, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+                                move-result v0
+                                if-eqz v0, :cond_check_dv3
+                                const/4 v0, 0x1
+                                return v0
+                                :cond_check_dv3
+                                const-string v0, "featureDetailsViewV3"
+                                invoke-virtual {p1, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+                                move-result v0
+                                if-eqz v0, :cond_toggle_pass
+                                const/4 v0, 0x1
                                 return v0
                                 :cond_toggle_pass
                                 nop
