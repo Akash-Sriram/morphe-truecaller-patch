@@ -14,6 +14,8 @@ build/
 *.apkm
 *.mpp
 *.idsig
+*.dex
+scratch/
 
 # Heavy decompilation binary caches (scripts in decompile/scripts remain tracked)
 decompile/dex/

@@ -104,7 +104,6 @@ val truecallerDisableTelemetryPatch = bytecodePatch(
             "Lcom/truecaller/familyprotect/domain/status/activity/receiver/UserActivityTransitionBroadcastReceiver;",
             "Lcom/truecaller/familyprotect/domain/remotereject/notification/RemoteRejectNotificationButtonReceiver;",
             "Lcom/truecaller/familyprotect/domain/notification/FamilyGroupNotificationActionReceiver;",
-            "Lcom/truecaller/presence/domain/worker/PresenceSchedulerReceiver;",
             "Lcom/truecaller/util/ScreenUnlockedBroadcastReceiver;",
             "Lcom/truecaller/util/RingerModeChangedReceiver;",
             "Lcom/truecaller/stats/IntentChooserReceiver;",
@@ -159,11 +158,7 @@ val truecallerDisableTelemetryPatch = bytecodePatch(
         try {
             val ybxClass = mutableClassDefBy("Lybx;")
             for (method in ybxClass.methods) {
-                if (method.name == "h" && method.returnType == "V") {
-                    if (method.implementation != null) {
-                        method.addInstructions(0, "return-void")
-                    }
-                } else if (method.name == "f" && method.returnType == "Z") {
+                if (method.name == "f" && method.returnType == "Z") {
                     if (method.implementation != null) {
                         method.ensureRegisters(1)
                         method.addInstructions(

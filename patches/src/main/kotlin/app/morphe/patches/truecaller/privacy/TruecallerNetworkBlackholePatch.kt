@@ -83,6 +83,10 @@ val truecallerNetworkBlackholePatch = bytecodePatch(
                                 if-eq p0, v0, :cond_allowed
                                 sget-object v0, Lcom/truecaller/common/network/util/KnownEndpoints;->IMAGES:Lcom/truecaller/common/network/util/KnownEndpoints;
                                 if-eq p0, v0, :cond_allowed
+                                sget-object v0, Lcom/truecaller/common/network/util/KnownEndpoints;->PRESENCE_GRPC:Lcom/truecaller/common/network/util/KnownEndpoints;
+                                if-eq p0, v0, :cond_allowed
+                                sget-object v0, Lcom/truecaller/common/network/util/KnownEndpoints;->LAST_ACTIVITY:Lcom/truecaller/common/network/util/KnownEndpoints;
+                                if-eq p0, v0, :cond_allowed
                                 const-string v0, "127.0.0.1"
                                 return-object v0
                                 :cond_allowed
@@ -121,6 +125,10 @@ val truecallerNetworkBlackholePatch = bytecodePatch(
                                 sget-object v0, Lcom/truecaller/common/network/util/KnownEndpoints;->PROFILE:Lcom/truecaller/common/network/util/KnownEndpoints;
                                 if-eq p0, v0, :cond_allowed_url
                                 sget-object v0, Lcom/truecaller/common/network/util/KnownEndpoints;->IMAGES:Lcom/truecaller/common/network/util/KnownEndpoints;
+                                if-eq p0, v0, :cond_allowed_url
+                                sget-object v0, Lcom/truecaller/common/network/util/KnownEndpoints;->PRESENCE_GRPC:Lcom/truecaller/common/network/util/KnownEndpoints;
+                                if-eq p0, v0, :cond_allowed_url
+                                sget-object v0, Lcom/truecaller/common/network/util/KnownEndpoints;->LAST_ACTIVITY:Lcom/truecaller/common/network/util/KnownEndpoints;
                                 if-eq p0, v0, :cond_allowed_url
                                 new-instance v0, Lokhttp3/HttpUrl${'$'}Builder;
                                 invoke-direct {v0}, Lokhttp3/HttpUrl${'$'}Builder;-><init>()V

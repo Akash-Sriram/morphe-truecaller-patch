@@ -23,3 +23,12 @@ fun MutableMethod.ensureRegisters(needed: Int) {
         )
     field.setInt(impl, needed)
 }
+
+fun MutableMethod.addCatchAll(startIndex: Int, endIndex: Int, handlerIndex: Int) {
+    val impl = implementation ?: return
+    val start = impl.newLabelForIndex(startIndex)
+    val end = impl.newLabelForIndex(endIndex)
+    val handler = impl.newLabelForIndex(handlerIndex)
+    impl.addCatch(start, end, handler)
+}
+

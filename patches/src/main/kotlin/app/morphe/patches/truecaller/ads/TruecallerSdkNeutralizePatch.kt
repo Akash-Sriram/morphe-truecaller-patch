@@ -6,7 +6,6 @@ import app.morphe.patcher.patch.bytecodePatch
 import app.morphe.patches.truecaller.shared.Constants.COMPATIBILITY_TRUECALLER
 import app.morphe.patches.truecaller.shared.Fingerprints.CleverTapFactoryFingerprint
 import app.morphe.patches.truecaller.shared.Fingerprints.MintegralInitFingerprint
-import app.morphe.patches.truecaller.shared.Fingerprints.PresenceStreamFingerprint
 import app.morphe.patches.truecaller.shared.Fingerprints.VungleInitFingerprint
 
 private const val RETURN_VOID = "return-void"
@@ -134,12 +133,7 @@ val truecallerSdkNeutralizePatch = bytecodePatch(
                 .addInstructions(0, RETURN_VOID)
         } catch (_: Exception) { /* SDK absent */ }
 
-        // 14. Presence gRPC stream — return void
-        try {
-            PresenceStreamFingerprint.method.addInstructions(0, RETURN_VOID)
-        } catch (_: PatchException) { /* SDK absent */ }
-
-        // 15. Google ML Kit — return empty list
+        // 14. Google ML Kit — return empty list
         try {
             mutableClassDefBy("Lcom/google/mlkit/common/internal/CommonComponentRegistrar;").methods
                 .first { it.name == "getComponents" && it.returnType == "Ljava/util/List;" }

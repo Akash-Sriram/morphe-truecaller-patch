@@ -44,6 +44,47 @@
       "options": []
     },
     {
+      "name": "Truecaller — Avatar Resilience & Cloud Photo Fallback",
+      "description": "Prioritizes online Cloud avatar photos over unresolvable local address book URIs in the contact aggregator and automatically heals existing database records on startup.",
+      "default": true,
+      "category": null,
+      "dependencies": [],
+      "compatiblePackages": [
+        {
+          "packageName": "com.truecaller",
+          "name": "Truecaller",
+          "description": null,
+          "apkFileType": "APKM",
+          "appIconColor": "#005AF0",
+          "signatures": null,
+          "targets": [
+            {
+              "version": "26.10.6",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": 24,
+              "description": null
+            },
+            {
+              "version": "26.12.5",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": 24,
+              "description": null
+            },
+            {
+              "version": "26.39.6",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": 24,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
       "name": "Truecaller — Bypass Permission Gate",
       "description": "Bypasses the mandatory permission nag screen, allowing the app to run without contacts, call logs, or SMS permissions.",
       "default": true,
@@ -131,6 +172,14 @@
       "default": true,
       "category": null,
       "dependencies": [
+        "BytecodePatch",
+        "BytecodePatch",
+        "BytecodePatch",
+        "BytecodePatch",
+        "BytecodePatch",
+        "BytecodePatch",
+        "BytecodePatch",
+        "BytecodePatch",
         "BytecodePatch",
         "BytecodePatch",
         "BytecodePatch",
@@ -273,6 +322,47 @@
       "options": []
     },
     {
+      "name": "Truecaller — Deep Privacy & Anti-Fingerprinting",
+      "description": "Zeroes Google Advertising ID (GAID), suppresses background clipboard snooping, and masks OkHttp requests with generic Pixel 8 User-Agent.",
+      "default": true,
+      "category": null,
+      "dependencies": [],
+      "compatiblePackages": [
+        {
+          "packageName": "com.truecaller",
+          "name": "Truecaller",
+          "description": null,
+          "apkFileType": "APKM",
+          "appIconColor": "#005AF0",
+          "signatures": null,
+          "targets": [
+            {
+              "version": "26.10.6",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": 24,
+              "description": null
+            },
+            {
+              "version": "26.12.5",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": 24,
+              "description": null
+            },
+            {
+              "version": "26.39.6",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": 24,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
       "name": "Truecaller — Disable Silent SMS Verification",
       "description": "Neutralizes covert Mobile-Originated (MO) verification SMS messages by intercepting Truecaller verification nonces before reaching SmsManager.",
       "default": true,
@@ -357,6 +447,88 @@
     {
       "name": "Truecaller — Disable Update Check",
       "description": "Disables in-app update checks and update nag prompts.",
+      "default": true,
+      "category": null,
+      "dependencies": [],
+      "compatiblePackages": [
+        {
+          "packageName": "com.truecaller",
+          "name": "Truecaller",
+          "description": null,
+          "apkFileType": "APKM",
+          "appIconColor": "#005AF0",
+          "signatures": null,
+          "targets": [
+            {
+              "version": "26.10.6",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": 24,
+              "description": null
+            },
+            {
+              "version": "26.12.5",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": 24,
+              "description": null
+            },
+            {
+              "version": "26.39.6",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": 24,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
+      "name": "Truecaller — Fix Call Initiation and Dialer Redirection",
+      "description": "Fixes outgoing call initiation from dialpad and call log by neutralizing call interception overlays and restoring default dialer intent redirection.",
+      "default": true,
+      "category": null,
+      "dependencies": [],
+      "compatiblePackages": [
+        {
+          "packageName": "com.truecaller",
+          "name": "Truecaller",
+          "description": null,
+          "apkFileType": "APKM",
+          "appIconColor": "#005AF0",
+          "signatures": null,
+          "targets": [
+            {
+              "version": "26.10.6",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": 24,
+              "description": null
+            },
+            {
+              "version": "26.12.5",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": 24,
+              "description": null
+            },
+            {
+              "version": "26.39.6",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": 24,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
+      "name": "Truecaller — Fix Call Log Deletion & Synchronization",
+      "description": "Fixes call record deletion in Calls tab and system call log sync by supporting all call types (including rejected and blocked calls).",
       "default": true,
       "category": null,
       "dependencies": [],
@@ -847,6 +1019,47 @@
       "options": []
     },
     {
+      "name": "Truecaller — SQLite Storage & RAM Purge",
+      "description": "Deletes obsolete database files on startup, preventing dead database engines from consuming RAM and flash storage.",
+      "default": true,
+      "category": null,
+      "dependencies": [],
+      "compatiblePackages": [
+        {
+          "packageName": "com.truecaller",
+          "name": "Truecaller",
+          "description": null,
+          "apkFileType": "APKM",
+          "appIconColor": "#005AF0",
+          "signatures": null,
+          "targets": [
+            {
+              "version": "26.10.6",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": 24,
+              "description": null
+            },
+            {
+              "version": "26.12.5",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": 24,
+              "description": null
+            },
+            {
+              "version": "26.39.6",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": 24,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
       "name": "Truecaller — Settings Profile Navigation & Stats",
       "description": "Wires profile avatar directly to Settings, profile card to Edit Profile, shows % badge, hides Help, and displays stats at the bottom of Settings.",
       "default": true,
@@ -888,8 +1101,90 @@
       "options": []
     },
     {
+      "name": "Truecaller — Startup Speed, RAM & Battery Optimization",
+      "description": "Strips CleverTap and Freshchat SDK initialization, preventing background SQLite databases, telemetry threads, and idle wakeups.",
+      "default": true,
+      "category": null,
+      "dependencies": [],
+      "compatiblePackages": [
+        {
+          "packageName": "com.truecaller",
+          "name": "Truecaller",
+          "description": null,
+          "apkFileType": "APKM",
+          "appIconColor": "#005AF0",
+          "signatures": null,
+          "targets": [
+            {
+              "version": "26.10.6",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": 24,
+              "description": null
+            },
+            {
+              "version": "26.12.5",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": 24,
+              "description": null
+            },
+            {
+              "version": "26.39.6",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": 24,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
       "name": "Truecaller — Storage & Local Telemetry Minimization",
       "description": "Neutralizes local SQLite telemetry logging (persisted_event in analytics.db), outgoing contact view logging (profile_view_events in tc.db), and Google Crashlytics/DataTransport registrars.",
+      "default": true,
+      "category": null,
+      "dependencies": [],
+      "compatiblePackages": [
+        {
+          "packageName": "com.truecaller",
+          "name": "Truecaller",
+          "description": null,
+          "apkFileType": "APKM",
+          "appIconColor": "#005AF0",
+          "signatures": null,
+          "targets": [
+            {
+              "version": "26.10.6",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": 24,
+              "description": null
+            },
+            {
+              "version": "26.12.5",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": 24,
+              "description": null
+            },
+            {
+              "version": "26.39.6",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": 24,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
+      "name": "Truecaller — Strict Domain Blackhole & Zero-Leakage DNS Firewall",
+      "description": "Enforces an application-level DNS firewall blocking all non-whitelisted ad and surveillance domains at the OkHttp resolver layer.",
       "default": true,
       "category": null,
       "dependencies": [],
@@ -972,6 +1267,47 @@
     {
       "name": "Truecaller — Suppress Promotional Upsells & Paywalls",
       "description": "Neutralizes promotional banners, incognito mode upsells, and paywall/ad activities across the app.",
+      "default": true,
+      "category": null,
+      "dependencies": [],
+      "compatiblePackages": [
+        {
+          "packageName": "com.truecaller",
+          "name": "Truecaller",
+          "description": null,
+          "apkFileType": "APKM",
+          "appIconColor": "#005AF0",
+          "signatures": null,
+          "targets": [
+            {
+              "version": "26.10.6",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": 24,
+              "description": null
+            },
+            {
+              "version": "26.12.5",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": 24,
+              "description": null
+            },
+            {
+              "version": "26.39.6",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": 24,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
+      "name": "Truecaller — Zero-Wakeup Deep Sleep & Battery Lockdown",
+      "description": "Neutralizes background CPU wakeups from JobScheduler and AlarmManager while preserving real-time incoming call recognition.",
       "default": true,
       "category": null,
       "dependencies": [],

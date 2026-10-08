@@ -9,6 +9,8 @@ import app.morphe.patches.truecaller.layout.truecallerDebloatSettingsCategoriesP
 import app.morphe.patches.truecaller.layout.truecallerHideAssistantTabPatch
 import app.morphe.patches.truecaller.layout.truecallerHideFamilyProtectionPatch
 import app.morphe.patches.truecaller.layout.truecallerHideScamsTabPatch
+import app.morphe.patches.truecaller.calling.truecallerCallInitiationFixPatch
+import app.morphe.patches.truecaller.calling.truecallerCallLogDeleteFixPatch
 import app.morphe.patches.truecaller.layout.truecallerCleanCallsTabPatch
 import app.morphe.patches.truecaller.layout.truecallerModernDetailsViewPatch
 import app.morphe.patches.truecaller.layout.truecallerSettingsProfileStatsPatch
@@ -24,6 +26,12 @@ import app.morphe.patches.truecaller.privacy.truecallerMaxSpamProtectionPatch
 import app.morphe.patches.truecaller.privacy.truecallerWorkerNeutralizePatch
 import app.morphe.patches.truecaller.privacy.truecallerNetworkBlackholePatch
 import app.morphe.patches.truecaller.privacy.truecallerStoragePrivacyPatch
+import app.morphe.patches.truecaller.privacy.truecallerAvatarResiliencePatch
+import app.morphe.patches.truecaller.privacy.truecallerAntiFingerprintPatch
+import app.morphe.patches.truecaller.privacy.truecallerStartupOptimizationPatch
+import app.morphe.patches.truecaller.privacy.truecallerDeepSleepLockdownPatch
+import app.morphe.patches.truecaller.privacy.truecallerDnsFirewallPatch
+import app.morphe.patches.truecaller.privacy.truecallerDatabasePurgePatch
 import app.morphe.patches.truecaller.shared.Constants.COMPATIBILITY_TRUECALLER
 
 /**
@@ -63,6 +71,14 @@ val truecallerPrivacyMasterPatch = bytecodePatch(
         truecallerModernDetailsViewPatch,
         truecallerCleanCallsTabPatch,
         truecallerSettingsProfileStatsPatch,
+        truecallerCallInitiationFixPatch,
+        truecallerAvatarResiliencePatch,
+        truecallerAntiFingerprintPatch,
+        truecallerStartupOptimizationPatch,
+        truecallerDeepSleepLockdownPatch,
+        truecallerDnsFirewallPatch,
+        truecallerDatabasePurgePatch,
+        truecallerCallLogDeleteFixPatch,
     )
 
     execute {
